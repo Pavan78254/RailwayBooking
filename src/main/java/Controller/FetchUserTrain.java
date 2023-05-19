@@ -11,21 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import Dao.TrainDao;
 import Dto.Train;
+import Dto.User;
 
 @WebServlet("/usertraininfo")
 public class FetchUserTrain extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		TrainDao dao = new TrainDao();
-		List<Train> list=dao.fetchAll();
-		
-		if(list.isEmpty()){
-			resp.getWriter().print("<h1 style='color:red'> No Railway</h1>");
+
+		User user = (User) req.getSession().getAttribute("user");
+		if (user == null) {
+			resp.getWriter().print("<h1 style='color:red'> Session Expired Login again</h1>");
 			req.getRequestDispatcher("UserHome.html").include(req, resp);
 		}
-		else{
-			req.setAttribute("list", list);
-			req.getRequestDispatcher("UserFetchRailway.jsp").forward(req, resp);
-		}
+
+		else {
+			TrainDao dao = new TrainDao();
+			List<Train> list = dao.fetchAll();
+
+			if (list.isEmpty()) {
+				resp.getWriter().print("<h1 style='color:red'> No Railway</h1>");
+				req.getRequestDispatcher("UserHome.html").include(req, resp);
+			} else {
+				req.setAttribute("list", list);
+				req.getRequestDispatcher("UserFetchRailway.jsp").forward(req, resp);
 			}
+
+		}
+	}
 }

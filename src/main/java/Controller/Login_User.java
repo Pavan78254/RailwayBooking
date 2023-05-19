@@ -7,36 +7,41 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import Dao.UserDao;
 import Dto.User;
+
 @WebServlet("/login")
 public class Login_User extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int userid=Integer.parseInt(req.getParameter("userid") );
-		String password= req.getParameter("password");
-		UserDao dao=new UserDao();
-		User user=dao.find(userid);
-		
-		if(user==null){
+		int userid = Integer.parseInt(req.getParameter("userid"));
+		String password = req.getParameter("password");
+		UserDao dao = new UserDao();
+		User user = dao.find(userid);
+
+		if (user == null) {
 			resp.getWriter().print("<h1 style='color:red'>Invalid Id</h1>");
 			req.getRequestDispatcher("Login.html").include(req, resp);
-		}
-		else{
-			if(user.getPassword().equals(password)){
-				resp.getWriter().print("<h1 style='color:green'>Login Successfull</h1>");
-				req.getRequestDispatcher("UserHome.html").include(req, resp);	
-			}
-			else{
+		} 
+		
+		else {
+			if (user.getPassword().equals(password)) {
+				
+				HttpSession session=req.getSession();
+				session.setAttribute("user", user);
+				
+				resp.getWriter().print("<h1 style='color:green'>Login Successful</h1>");
+				req.getRequestDispatcher("UserHome.html").include(req, resp);
+			} 
+			else {
 				resp.getWriter().print("<h1 style='color:red'>Invalid Password</h1>");
 				req.getRequestDispatcher("Login.html").include(req, resp);
 			}
-			
+
 		}
-		
-		
+
 	}
 }

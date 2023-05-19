@@ -1,8 +1,8 @@
 <%@page import="java.util.Arrays"%>
 <%@page import="Dto.Train"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+	<%
 		List<Train> list = (List<Train>) request.getAttribute("list");
 	%>
 	<table border="1">
@@ -37,7 +37,7 @@
 			<th><%=train.getTime()[0]%></th>
 			<th><%=train.getTime()[train.getTime().length - 1]%></th>
 			<th><%=Arrays.toString(train.getDays())%></th>
-			<th><button>Book</button> </th>
+			<th><a href="BookTicket.jsp?tn=<%=train.getNumber() %>"><button>Book</button></a></th>
 		</tr>
 		<%
 			}

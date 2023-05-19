@@ -49,6 +49,7 @@
 		<%
 			}
 		%>
-	</table>
+	</table><br>
+	<a href="Home.html"><button>Back</button> </a>
 </body>
 </html>

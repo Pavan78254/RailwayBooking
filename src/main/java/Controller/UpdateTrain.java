@@ -39,11 +39,11 @@ public class UpdateTrain extends HttpServlet {
 		
 		
 		TrainDao dao=new TrainDao();
-		dao.save(train);
+		dao.update(train);
 		
 		List<Train> list=dao.fetchAll();
 		
-		resp.getWriter().print("<h1 style='color:green'>Succesfully added the details</h1> ");
+		resp.getWriter().print("<h1 style='color:green'>Succesfully Updated the details</h1> ");
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("FetchRailwayInfo.jsp").include(req, resp);
 

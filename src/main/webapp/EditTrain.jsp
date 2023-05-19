@@ -18,10 +18,19 @@ Train train=dao.fetch(Integer.parseInt(request.getParameter("tnumber")));
 Train Number:<input type="number" name="tnumber" value="<%=train.getNumber()%>" readonly="readonly"><br><br>
 Train Name:<input type="text" name="tname" value="<%=train.getName()%>"><br><br>
 Number of Seats:<input type="number" name="tseat" value="<%=train.getSeat()%>"><br><br>
-Stations:<textarea rows="5" cols="30" name="tstation" value="<%=Arrays.toString(train.getStations()) %>"></textarea><br><br>
-Ticket Price:<textarea rows="5" cols="30" name="tprice" value="<%=Arrays.toString(train.getPrice()) %>" ></textarea><br><br>
-Time:<textarea rows="5" cols="30" name="ttime" value="<%=Arrays.toString(train.getTime()) %>"></textarea><br><br>
-Days:<textarea rows="5" cols="30" name="tdays" value="<%=Arrays.toString(train.getDays()) %>" ></textarea><br><br>
+Stations:<textarea rows="5" cols="30" name="tstation"> <%for(String station: train.getStations()){
+out.print(station+",");}	%></textarea><br><br>
+
+Ticket Price:<textarea rows="5" cols="30" name="tprice"><% for(String price: train.getPrice()){
+out.print(price+",");}	%> </textarea><br><br>
+
+Time:<textarea rows="5" cols="30" name="ttime"> <%for(String time:train.getTime()){
+	out.print(time+",");
+}
+	%></textarea><br><br>
+Days:<textarea rows="5" cols="30" name="tdays" > <%for(String day: train.getDays()){
+	out.print(day+",");}%></textarea><br><br>
+
 <button type="reset">Cancel</button>
 <button>Update</button>
 </form>

@@ -19,7 +19,7 @@
 
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Railway" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Railway_Booking" />
 
 			<property name="javax.persistence.jdbc.user" value="root" />
 
